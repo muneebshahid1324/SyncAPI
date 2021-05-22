@@ -11,7 +11,7 @@ namespace SyncAPI
 
     public class DataSyncRequest
     {
-        public int? lastSyncID { get; set; }
+        public DateTime? lastSyncDateTime { get; set; }
         public List<RequestLecture> lectures { get; set; }
         public List<RequestLecturerStudent> lecturerStudents { get; set; }
     }
@@ -20,7 +20,8 @@ namespace SyncAPI
     {
         public Guid id { get; set; }
         public string name { get; set; }
-        public int SyncID { get; set; }
+        public DateTime? UpdatedDate { get; set; }
+        public DateTime? CreatedDate { get; set; }
         public RequestLecturer lecturer { get; set; }
     }
 
@@ -28,6 +29,8 @@ namespace SyncAPI
     {
         public Guid id { get; set; }
         public string name { get; set; }
+        public DateTime? UpdatedDate { get; set; }
+        public DateTime? CreatedDate { get; set; }
         public List<RequestStudent> students { get; set; }
     }
 
@@ -35,6 +38,8 @@ namespace SyncAPI
     {
         public Guid id { get; set; }
         public string name { get; set; }
+        public DateTime? UpdatedDate { get; set; }
+        public DateTime? CreatedDate { get; set; }
         public Guid lectureStudentID { get; set; }
     }
 
@@ -43,5 +48,7 @@ namespace SyncAPI
         public Guid id { get; set; }
         public Guid? Lecturer_ID { get; set; }
         public Guid? Student_ID { get; set; }
+        public DateTime? UpdatedDate { get; set; }
+        public DateTime? CreatedDate { get; set; }
     }
 }
