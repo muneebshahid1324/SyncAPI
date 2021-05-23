@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DataAccess;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SyncAPI.Controllers
 {
@@ -36,15 +37,17 @@ namespace SyncAPI.Controllers
                     RequestLecture objNewLecture = new RequestLecture();
                     objNewLecture.id = x.ID;
                     objNewLecture.name = x.Name;
-                    objNewLecture.UpdatedDate = x.UpdatedDate;
-                    objNewLecture.CreatedDate = x.CreatedDate;
+                    objNewLecture.Deleted = x.Deleted;
+                    objNewLecture.UpdatedDate = dateToString(x.UpdatedDate);
+                    objNewLecture.CreatedDate = dateToString(x.CreatedDate);
 
                     Lecturer newLecturer = db.Lecturers.Where(s => s.Lecture_ID == objNewLecture.id).FirstOrDefault();
                     RequestLecturer objNewLecturer = new RequestLecturer();
                     objNewLecturer.id = newLecturer.ID;
                     objNewLecturer.name = newLecturer.Name;
-                    objNewLecturer.UpdatedDate = newLecturer.UpdatedDate;
-                    objNewLecturer.CreatedDate = newLecturer.CreatedDate;
+                    objNewLecturer.Deleted = newLecturer.Deleted;
+                    objNewLecturer.UpdatedDate = dateToString(newLecturer.UpdatedDate);
+                    objNewLecturer.CreatedDate = dateToString(newLecturer.CreatedDate);
                     objNewLecture.lecturer = objNewLecturer;
 
                     List<Lecturer_Student> newLecturerStudents = db.Lecturer_Students.Where(s => s.Lecturer_ID == objNewLecturer.id).ToList<Lecturer_Student>();
@@ -56,8 +59,9 @@ namespace SyncAPI.Controllers
                         RequestStudent requestStudent = new RequestStudent();
                         requestStudent.id = newStudent.ID;
                         requestStudent.name = newStudent.Name;
-                        requestStudent.UpdatedDate = newStudent.UpdatedDate;
-                        requestStudent.CreatedDate = newStudent.CreatedDate;
+                        requestStudent.Deleted = newStudent.Deleted;
+                        requestStudent.UpdatedDate = dateToString(newStudent.UpdatedDate);
+                        requestStudent.CreatedDate = dateToString(newStudent.CreatedDate);
                         reqStudents.Add(requestStudent);
                     }
                     objNewLecture.lecturer.students = reqStudents;
@@ -74,14 +78,16 @@ namespace SyncAPI.Controllers
                         objLecture = new Lecture();
                         objLecture.ID = x.id;// == Guid.Empty ? Guid.NewGuid() : x.id;
                         objLecture.Name = x.name;
-                        objLecture.UpdatedDate = x.UpdatedDate;
-                        objLecture.CreatedDate = x.CreatedDate;
+                        objLecture.Deleted = x.Deleted;
+                        objLecture.UpdatedDate = strToDate(x.UpdatedDate);
+                        objLecture.CreatedDate = strToDate(x.CreatedDate);
                         db.Lectures.InsertOnSubmit(objLecture);
                     }
                     else
                     {
                         objLecture.Name = x.name;
-                        objLecture.UpdatedDate = x.UpdatedDate;
+                        objLecture.Deleted = x.Deleted;
+                        objLecture.UpdatedDate = strToDate(x.UpdatedDate);
                     }
                     db.SubmitChanges();
 
@@ -95,16 +101,18 @@ namespace SyncAPI.Controllers
                         objlecturer = new Lecturer();
                         objlecturer.ID = x.lecturer.id;// == Guid.Empty ? Guid.NewGuid() : x.lecturer.id;
                         objlecturer.Name = x.lecturer.name;
+                        objlecturer.Deleted = x.lecturer.Deleted;
                         objlecturer.Lecture_ID = objLecture.ID;
-                        objlecturer.CreatedDate = x.lecturer.CreatedDate;
-                        objlecturer.UpdatedDate = x.lecturer.UpdatedDate;
+                        objlecturer.CreatedDate = strToDate(x.lecturer.CreatedDate);
+                        objlecturer.UpdatedDate = strToDate(x.lecturer.UpdatedDate);
                         db.Lecturers.InsertOnSubmit(objlecturer);
                     }
                     else
                     {
                         objlecturer.Name = x.lecturer.name;
                         objlecturer.Lecture_ID = objLecture.ID;
-                        objlecturer.UpdatedDate = x.lecturer.UpdatedDate;
+                        objlecturer.Deleted = x.lecturer.Deleted;
+                        objlecturer.UpdatedDate = strToDate(x.lecturer.UpdatedDate);
                     }
                     db.SubmitChanges();
 
@@ -117,14 +125,16 @@ namespace SyncAPI.Controllers
                             objStudent = new Student();
                             objStudent.ID = s.id;// == Guid.Empty ? Guid.NewGuid() : s.id;
                             objStudent.Name = s.name;
-                            objStudent.CreatedDate = s.CreatedDate;
-                            objStudent.UpdatedDate = s.UpdatedDate;
+                            objStudent.Deleted = s.Deleted;
+                            objStudent.CreatedDate = strToDate(s.CreatedDate);
+                            objStudent.UpdatedDate = strToDate(s.UpdatedDate);
                             db.Students.InsertOnSubmit(objStudent);
                         }
                         else
                         {
                             objStudent.Name = s.name;
-                            objStudent.UpdatedDate = s.UpdatedDate;
+                            objStudent.Deleted = s.Deleted;
+                            objStudent.UpdatedDate = strToDate(s.UpdatedDate);
                         }                        
                         db.SubmitChanges();
 
@@ -150,6 +160,25 @@ namespace SyncAPI.Controllers
                 }
                 return json;
             }
+        }
+
+
+        private string dateToString(DateTime? dateTime)
+        {
+            if(dateTime == null)
+            {
+                return string.Empty;
+            }
+            else
+            {
+                DateTime dt = Convert.ToDateTime(dateTime);
+                return dt.ToString("yyyy-MM-dd HH:mm:ss.d");
+            }
+        }
+
+        private DateTime strToDate(string strDate)
+        {
+            return Convert.ToDateTime(strDate);
         }
     }
 }

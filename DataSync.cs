@@ -20,8 +20,9 @@ namespace SyncAPI
     {
         public Guid id { get; set; }
         public string name { get; set; }
-        public DateTime? UpdatedDate { get; set; }
-        public DateTime? CreatedDate { get; set; }
+        public string UpdatedDate { get; set; }
+        public string CreatedDate { get; set; }
+        public bool Deleted { get; set; }
         public RequestLecturer lecturer { get; set; }
     }
 
@@ -29,8 +30,9 @@ namespace SyncAPI
     {
         public Guid id { get; set; }
         public string name { get; set; }
-        public DateTime? UpdatedDate { get; set; }
-        public DateTime? CreatedDate { get; set; }
+        public bool Deleted { get; set; }
+        public string UpdatedDate { get; set; }
+        public string CreatedDate { get; set; }
         public List<RequestStudent> students { get; set; }
     }
 
@@ -38,8 +40,9 @@ namespace SyncAPI
     {
         public Guid id { get; set; }
         public string name { get; set; }
-        public DateTime? UpdatedDate { get; set; }
-        public DateTime? CreatedDate { get; set; }
+        public bool Deleted { get; set; }
+        public string UpdatedDate { get; set; }
+        public string CreatedDate { get; set; }
         public Guid lectureStudentID { get; set; }
     }
 
@@ -48,7 +51,7 @@ namespace SyncAPI
         public Guid id { get; set; }
         public Guid? Lecturer_ID { get; set; }
         public Guid? Student_ID { get; set; }
-        public DateTime? UpdatedDate { get; set; }
-        public DateTime? CreatedDate { get; set; }
+        public string UpdatedDate { get; set; }
+        public string CreatedDate { get; set; }
     }
 }
