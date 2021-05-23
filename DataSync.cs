@@ -11,7 +11,7 @@ namespace SyncAPI
 
     public class DataSyncRequest
     {
-        public DateTime? lastSyncDateTime { get; set; }
+        public string lastSyncDateTime { get; set; }
         public List<RequestLecture> lectures { get; set; }
         public List<RequestLecturerStudent> lecturerStudents { get; set; }
     }

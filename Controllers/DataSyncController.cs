@@ -30,7 +30,7 @@ namespace SyncAPI.Controllers
                 DateTime? syncDateTime = DateTime.Now;
 
                 //get data added after last sync id
-                var newData = db.Lectures.Where(s => (request.lastSyncDateTime == null || s.UpdatedDate > request.lastSyncDateTime));
+                var newData = db.Lectures.Where(s => (request.lastSyncDateTime == null || s.UpdatedDate > strToDate(request.lastSyncDateTime)));
                 List<RequestLecture> newLectures = new List<RequestLecture>();
                 foreach (var x in newData)
                 {
@@ -142,7 +142,7 @@ namespace SyncAPI.Controllers
                         if(objLecturerStudent == null)
                         {
                             objLecturerStudent = new Lecturer_Student();
-                            objLecturerStudent.ID = s.lectureStudentID;// == Guid.Empty ? Guid.NewGuid() : objLecturerStudent.ID;
+                            objLecturerStudent.ID = s.lectureStudentID == Guid.Empty ? Guid.NewGuid() : objLecturerStudent.ID;
                             objLecturerStudent.Student_ID = objStudent.ID;
                             objLecturerStudent.Lecturer_ID = objlecturer.ID;
                             objLecturerStudent.CreatedDate = syncDateTime;
