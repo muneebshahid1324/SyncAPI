@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="SyncDB">
+  <DataContextMoniker Name="/SyncDBDataContext" />
+  <nestedChildShapes>
+    <classShape Id="664116e7-74c6-4f1f-b4d8-016438c901f6" absoluteBounds="0.75, 0.75, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/SyncDBDataContext/Lecture" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9d131c1f-4e7e-438f-9f61-8a3964d4da6f" absoluteBounds="0.765, 1.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b1110cf0-7e35-4d00-ae21-146715890682" absoluteBounds="3.75, 0.75, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/SyncDBDataContext/Student" />
+      <nestedChildShapes>
+        <elementListCompartment Id="34674791-ddb9-40af-b586-8441a0d0fb4a" absoluteBounds="3.765, 1.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c9817c50-14a0-4f6e-97de-5c2d8dd6648d" absoluteBounds="0.75, 3.75, 2, 1.9631982421875005">
+      <DataClassMoniker Name="/SyncDBDataContext/Lecturer" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a1023677-6ffb-42b6-854c-ee058ede5e7a" absoluteBounds="0.765, 4.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="feeeede1-9d9f-4e9c-b846-f63da0a406a5" absoluteBounds="3.75, 3.75, 2, 1.9631982421875005">
+      <DataClassMoniker Name="/SyncDBDataContext/Lecturer_Student" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a68c909a-6377-4951-90e6-ff76d09bc4df" absoluteBounds="3.765, 4.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
